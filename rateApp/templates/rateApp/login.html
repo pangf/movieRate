@@ -1,0 +1,25 @@
+{% extends 'rateApp/base.html' %}
+{% block myhdg %}
+    User Login
+{% endblock %}
+
+{% block body_block %}
+<body>
+<br>
+<center>
+   <lable>
+       <h3>User Login </h3>
+   </lable>
+          <form action="{% url 'rateApp:login' %}" method='POST',class="pull-right">
+            {% csrf_token %}
+            <input name='username' class="input-small" type="text" placeholder="User Name" size="40">
+              <br><br>
+            <input name='password' class="input-small" type="password" placeholder="Password" size="40">
+              <br><br>
+            <button class="btn" type="submit">Login</button>
+          </form>
+          <p> <a href="{% url 'rateApp:register'%}"> Register</a></p>
+    </center>
+</body>
+</html>
+{% endblock %}

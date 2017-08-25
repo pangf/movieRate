@@ -1,0 +1,75 @@
+{% extends 'rateApp/base.html' %}
+{% load staticfiles %}
+{% block myhdg %}
+
+{% endblock %}
+
+
+{% block body_block %}
+    <table>
+
+       {% if movielist %}
+           <span>
+              {% for movie  in movielist %}
+                   <tr><td>
+                  <h2 style="margin-left: 120px">{{ movie.movie_name }}</h2>
+                   {% if movie.currentRateValue == 0 %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_6.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% elif movie.currentRateValue == 1 %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_5.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% elif movie.currentRateValue == 2 %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_4.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% elif movie.currentRateValue == 3 %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_3.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% elif movie.currentRateValue == 4 %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_2.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% elif movie.currentRateValue == 5 %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_1.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% else %}
+                        <img style="margin-left: 100px" src="{% static 'rateApp/rate_6.jpg' %}" alt="Rank" width="120" height="30"/>
+                    {% endif %}
+                <ol>
+                 <div id="layout">
+                   <ul>
+                    <li style="float:left;width:200px;"><img src="{{ movie.movie_image.url }}" alt="photo" width="200" height="300"/>
+                        <div id="image_bottom"><ul>
+                           <a href="/rateApp/addRate">I want rating</a>
+                         </ul>
+                         </div>
+                       </li>
+                     <li>
+                      <div id="image_info">
+                         <ul> <li>导演:{{ movie.director }}</li>
+                         <li>主演:{{ movie.actors }}</li>
+                         <li>编剧:{{ movie.writers }}</li>
+                         <li>日期:{{ movie.movie_date }}</li>
+                         <li>语言:{{ movie.language }}</li>
+                         <li>国家:{{ movie.country }}</li>
+                         <li>片长:{{ movie.length }}</li>
+                         <li>别名:{{ movie.alias }}</li>
+                         </ul>
+                       </div>
+                    </li>
+                   </ul>
+                 </div>
+                  </td></tr>
+
+                  <tr><td>
+                   <hr />
+               <h2 style="margin-left: 30px">Movie Introduction</h2>
+               <p style="margin-left:50px;margin-right:50px ">
+                {{ movie.movie_des }}
+               </p>
+                      <hr />
+               </td></tr>
+
+              {% endfor %}
+           </span>
+           </ol>
+
+
+       {% else %}
+         <strong>There are no available movie!</strong>
+       {% endif %}
+   </table>
+  {% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'rateApp/base.html' %}
+{% load staticfiles %}
+{% block myhdg %}
+
+{% endblock %}
+
+{% block body_block %}
+
+<body>
+<br>
+<center>
+
+   <lable>
+
+       <h3>Add Movie Rating</h3>
+
+   </lable>
+    <br>
+          <form action="{% url 'rateApp:addRate' %}" method='POST' class="pull-right">
+            {% csrf_token %}
+             <label>Please input rate title</label>
+            <input name='rateTitle' class="input-small" type="text" placeholder="rate title" size="75">
+              <br><br>
+              <label>Please input rate comment</label>
+              <div>
+              <textarea name="rateComment" cols=100 rows=10 placeholder="rate comment">
+              </textarea>
+              </div>
+              <label>Have see it</label>
+              <input name="see" type="checkbox" value="see" checked >
+              <input name="rateScore" class="input-small" type="text" placeholder="rate score" size="20">
+              <br >
+              <br><br>
+            <button class="btn" type="submit">Submit</button>
+          </form>
+
+    </center>
+</body>
+
+</html>
+{% endblock %}

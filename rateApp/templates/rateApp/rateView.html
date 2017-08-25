@@ -1,0 +1,33 @@
+{% extends 'rateApp/base.html' %}
+{% load staticfiles %}
+{% block myhdg %}
+
+{% endblock %}
+
+
+{% block body_block %}
+<table>
+{% if user_id  %}
+    <tr >
+    <td>
+       {% if rateList %}
+          <h2 style="margin-left: 30px">List of comment </h2>
+          <div>
+            <ul>
+                {% for rate in  rateList %}
+                    <hr>
+                    <li> <p style="color:#f00;" ><h3>"{{ rate.rate_title }}"<h3></h3> </p>{{ rate.user.user_alias }} Rating {{ rate.movie.movie_name }} on {{ rate.rate_date }}
+                        Score:{{ rate.rate_score  }}<br>
+                       {{ rate.rate_comment }}
+                    </li>
+                {% endfor %}
+            </ul>
+          </div>
+       {% endif %}
+    </td>
+    </tr>
+   {% else %}
+    <p> Plase login first</p>
+   {% endif %}
+    </table>
+  {% endblock %}

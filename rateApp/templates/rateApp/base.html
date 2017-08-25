@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{%static 'rateApp/style.css'%}"  />
+        <title>Movie Rating - {% block title %}Welcome!{% endblock %}</title>
+    </head>
+    <div class="menu">
+        <br>
+      <ul >
+          <li style="display:inline; margin-left:20px"><a href="/rateApp/">Home</a></li>
+          <li style="display:inline ;margin-left:15px"><a href="{% url 'rateApp:rateView'%}">Rating</a></li>
+          <li style="float:right;margin-right:50px;display:inline-block"><a href="{% url 'rateApp:register'%}">Registe</a></li>
+          <li style="float:right;margin-right:10px;display:inline-block"><a href="{% url 'rateApp:login'%}">Login</a></li>
+      </ul>
+    </div>
+    <hr style="margin-left: 20px;margin-right: 20px" />
+    <br>
+    <div class="rate-search">
+        <center>
+          <form action={% url 'rateApp:search'%}method="post" class="pull-right">
+            {% csrf_token %}
+            Welcom to Movie Rating <input name='search_text' style="width:400px" class="input-small" type="text" maxlength="100" placeholder="movie name/actor name" >
+            <button class="btn" type="submit">Search</button>
+          </form>
+     </center>
+    </div>
+    <br>
+    <hr style="margin-left: 20px;margin-right: 20px" />
+    <body>
+      <div id="container">
+        <div id="body">
+            <h1>{% block myhdg %}Hello {% endblock %}</h1>
+            {% block body_block %}*** {% endblock %}
+        <div></div>
+    <div id="footer">
+    <p>@Developed by Pang Fan All rights reserved University of Winsor Canada </p>
+    </div>
+    </div>
+      </div>
+    </body>
+
+</html>

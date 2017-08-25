@@ -1,0 +1,67 @@
+{% extends 'rateApp/base.html' %}
+{% load staticfiles %}
+{% block myhdg %}
+
+{% endblock %}
+
+{% block body_block %}
+<table>
+    <tr >
+    <td>
+       {% if movielist %}
+          <h2 style="margin-left: 30px">List of Movies</h2>
+             <div id="layout">
+             <ul>
+              {% for movie  in movielist %}
+                    <li style="float:left"><a href="/rateApp/{{ movie.movie_id }}"><img src="{{ movie.movie_image.url }}" alt="photo" width="100" height="150"/> {{ movie.movie_name }}</a>
+                    <div id="image_bottom"><ul>
+                    {% if movie.currentRateValue == 0 %}
+                        <img src="{% url 'static:rate_6.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% elif movie.currentRateValue == 1 %}
+                        <img src="{% url 'static:rate_5.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% elif movie.currentRateValue == 2 %}
+                        <img src="{% url 'static:rate_4.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% elif movie.currentRateValue == 3 %}
+                        <img src="{% url 'static:rate_3.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% elif movie.currentRateValue == 4 %}
+                        <img src="{% url 'static:rate_2.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% elif movie.currentRateValue == 5 %}
+                        <img src="{% url 'static:rate_1.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% else %}
+                        <img src="{% url 'static:rate_6.jpg' %}" alt="Rank" width="50" height="20"/>
+                    {% endif %}
+                    </ul>
+                    </div>
+                    </li>
+              {% endfor %}
+             </ul>
+             </div>
+
+       {% else %}
+         <strong>There are no available movie!</strong>
+       {% endif %}
+    </td>
+    </tr><tr><td>
+       {% if rateList %}
+          <h2 style="margin-left: 30px">List of comment </h2>
+          <div>
+            <ul>
+                {% for rate in  rateList %}
+                    <hr>
+                    <li> <p style="color:#f00;" ><h3>"{{ rate.rate_title }}"</h3></p>{{ rate.user.user_alias }} Rating {{ rate.movie.movie_name }} on {{ rate.rate_date }}
+                        Score:{{ rate.rate_score  }}
+                        <ul style="float: right">
+                            <li style="float:right;margin-right:50px;display:inline-block"><a  href="/rateApp/rateUsefull/{{ rate.rate_id }}">Was this rating useful?</a> </li>
+                            <li style="float:right;margin-right:10px;display:inline-block">{{ rate.rateusefull }}</li>
+                        </ul>
+                        <br>
+                       {{ rate.rate_comment }}
+                    </li>
+                {% endfor %}
+            </ul>
+          </div>
+       {% endif %}
+    </td>
+    </tr>
+    </table>
+  {% endblock %}

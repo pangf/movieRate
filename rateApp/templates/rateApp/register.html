@@ -1,0 +1,16 @@
+{% extends 'rateApp/base.html' %}
+{% block myhdg %}
+  Register a user
+{% endblock %}
+
+{% block body_block %}
+<body>
+    <p>Please ,sign up using the following form:</p>
+    <form action='{% url 'rateApp:register' %}' method='POST' >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register a user" />
+    </form>
+</body>
+</html>
+{% endblock %}
